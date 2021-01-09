@@ -62,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
                             Boolean success = response.getBoolean("success");
                             if(success) {
                                 //login success
+                                userId.setText("");
+                                userPassword.setText("");
                                 Toast login = Toast.makeText(getApplicationContext(), "Login Success!", LENGTH_SHORT);
                                 login.show();
                                 String jwt = response.getString("jwt");
