@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/searchpage"
+        android:title="Search"
+        android:icon="@drawable/search"
+        />
+    <item
+        android:id="@+id/chatpage"
+        android:title="Chat"
+        android:icon="@drawable/chat"/>
+    <item
+        android:id="@+id/mypage"
+        android:title="MyPage"
+        android:icon="@drawable/user"/>
+    <item
+        android:id="@+id/logout"
+        android:title="logout"
+        android:icon="@drawable/logout"/>
+</menu>
