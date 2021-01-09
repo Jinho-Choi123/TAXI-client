@@ -8,16 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class add_fragment extends Fragment {
+public class DetailFragment extends Fragment {
 
 
-
-    public add_fragment() {
+    public DetailFragment() {
         // Required empty public constructor
     }
 
-    public static add_fragment newInstance(String param1, String param2) {
-        add_fragment fragment = new add_fragment();
+    public static DetailFragment newInstance(String param1, String param2) {
+        DetailFragment fragment = new DetailFragment();
         Bundle args = new Bundle();
 
         fragment.setArguments(args);
@@ -36,6 +35,9 @@ public class add_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.add, container, false);
+        View view = inflater.inflate(R.layout.detail, container, false);
+
+
+        return view;
     }
 }
