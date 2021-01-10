@@ -1,12 +1,9 @@
 package com.example.app2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +12,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -48,7 +47,9 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                RequestQueue requestQueue = Volley.newRequestQueue(context);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                /*RequestQueue requestQueue = Volley.newRequestQueue(context);
                 HashMap data = new HashMap();
                 data.put("userId", userId.getText().toString());
                 data.put("userPassword", userPassword.getText().toString());
@@ -91,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                         Logger.log("error occurrrrrrrrrrrrrrrr", error.toString());
                     }
                 });
-                requestQueue.add(jsonObjectRequest);
+                requestQueue.add(jsonObjectRequest);*/
             }
         });
 

@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
         android:textSize="40sp"
-        android:text="Add" />
+        android:text="그룹 추가" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -32,9 +32,24 @@
             android:layout_below="@+id/textviewLogo"
             android:text="날짜"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:layout_width="117dp"
+            android:layout_height="38dp"
+            android:paddingLeft="20dp"
+            android:id="@+id/tv_add_d"
+            android:textSize="15sp"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="117dp"
+            android:layout_height="38dp"
+            android:id="@+id/tv_add_t"
+            android:textSize="15sp"
+            android:gravity="center"
+            />
         <ImageButton
             android:id="@+id/add_date_picker"
-            android:layout_width="74dp"
+            android:layout_width="60dp"
             android:layout_height="38dp"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
@@ -44,7 +59,7 @@
             android:layout_below="@+id/textviewLogo"/>
         <ImageButton
             android:id="@+id/add_time_picker"
-            android:layout_width="74dp"
+            android:layout_width="60dp"
             android:layout_height="38dp"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
@@ -52,50 +67,79 @@
             android:scaleType="fitCenter"
             android:src="@drawable/calendar"
             android:layout_below="@+id/textviewLogo"/>
-        <TextView
-            android:layout_width="200dp"
-            android:layout_height="38dp"
-            android:id="@+id/tv_add_td"
-            android:textSize="15sp"
-            android:gravity="center"
-            />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_add_start"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="출발지"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@+id/time_lay" />
+        android:id="@+id/start_lay"
+        android:paddingBottom="20dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/time_lay">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="출발지"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@+id/time_lay" />
 
-    <EditText
-        android:id="@+id/et_add_start"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_marginBottom="10dp"
-        android:inputType="textPassword"
-        android:layout_below="@+id/tv_add_start" />
+        <TextView
+            android:id="@+id/tv_add_start"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginBottom="10dp"
+            android:inputType="textPassword"
+            android:layout_below="@+id/tv_add_start" />
 
+        <ImageButton
+            android:id="@+id/ib_start"
+            android:layout_width="60dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/calendar"
+            android:layout_below="@+id/textviewLogo"/>
 
-    <TextView
-        android:id="@+id/tv_add_arrive"
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="도착지"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@+id/et_add_start" />
+        android:id="@+id/arrive_lay"
+        android:paddingBottom="20dp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/start_lay_lay">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도착지"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_below="@+id/time_lay" />
 
-    <EditText
-        android:id="@+id/et_add_arrive"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_marginBottom="10dp"
-        android:inputType="textEmailAddress"
-        android:layout_below="@+id/tv_add_arrive">
-    </EditText>
+        <TextView
+            android:id="@+id/tv_add_arrive"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginBottom="10dp"
+            android:inputType="textPassword"
+            android:layout_below="@+id/tv_add_start" />
+
+        <ImageButton
+            android:id="@+id/ib_arrive"
+            android:layout_width="60dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/calendar"
+            android:layout_below="@+id/textviewLogo"/>
+
+    </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -120,4 +164,4 @@
             tools:layout_editor_absoluteX="108dp"
             tools:layout_editor_absoluteY="0dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</RelativeLayout>
+</LinearLayout>
