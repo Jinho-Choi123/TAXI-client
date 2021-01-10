@@ -34,10 +34,13 @@ import java.io.IOException;
 import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
-
+    String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        this.userId = intent.getStringExtra("userId");
+        Logger.log("userid is gggggggggggggg", this.userId);
         setContentView(R.layout.activity_main);
 
         //set event handler for floating button
@@ -80,10 +83,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        loadFragment(new SearchFragment());
     }
     //fragment loader
     public void loadFragment(Fragment fragment) {
+        Bundle bundle = new Bundle();
+        bundle.putString("userId", this.userId);
+        fragment.setArguments(bundle);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment, fragment);

@@ -9,7 +9,7 @@
         android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.example.app2.SearchFragment"
+        class="com.example.app2.MyPageFragment"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

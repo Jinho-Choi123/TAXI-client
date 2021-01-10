@@ -62,8 +62,6 @@ public class LoginActivity extends AppCompatActivity {
                             Boolean success = response.getBoolean("success");
                             if(success) {
                                 //login success
-                                userId.setText("");
-                                userPassword.setText("");
                                 Toast login = Toast.makeText(getApplicationContext(), "Login Success!", LENGTH_SHORT);
                                 login.show();
                                 String jwt = response.getString("jwt");
@@ -72,6 +70,9 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sf.edit();
                                 editor.putString("jwt", jwt);
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("userId", userId.getText().toString());
+                                userId.setText("");
+                                userPassword.setText("");
                                 startActivity(intent);
                             } else {
                                 //failed to login
