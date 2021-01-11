@@ -1,0 +1,198 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textviewLogo"
+            android:layout_width="350dp"
+            android:layout_height="54dp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:textSize="20sp"
+            android:text="그룹 추가" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_below="@+id/textviewLogo"
+            android:id="@+id/time_lay"
+            android:paddingBottom="20dp"
+            >
+            <TextView
+                android:id="@+id/tv_add_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/textviewLogo"
+                android:text="날짜"
+                android:textSize="15sp"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="38dp"
+                android:paddingLeft="20dp"
+                android:id="@+id/tv_add_d"
+                android:textSize="15sp"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="38dp"
+                android:id="@+id/tv_add_t"
+                android:textSize="15sp"
+                android:gravity="center"
+                />
+            <ImageButton
+                android:id="@+id/add_date_picker"
+                android:layout_width="40dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:src="@drawable/calendar"
+                android:layout_below="@+id/textviewLogo"/>
+            <ImageButton
+                android:id="@+id/add_time_picker"
+                android:layout_width="40dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:src="@drawable/calendar"
+                android:layout_below="@+id/textviewLogo"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_lay"
+            android:paddingBottom="20dp"
+            android:gravity="center"
+            android:layout_below="@+id/time_lay">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="출발지"
+                android:textSize="15sp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_below="@+id/time_lay" />
+
+            <TextView
+                android:id="@+id/tv_add_start"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/tv_add_start"
+                android:gravity="center"/>
+
+            <ImageButton
+                android:id="@+id/ib_start"
+                android:layout_width="60dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:src="@drawable/calendar"
+                android:layout_below="@+id/textviewLogo"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/arrive_lay"
+            android:paddingBottom="10dp"
+            android:gravity="center"
+            android:layout_below="@+id/start_lay">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="도착지"
+                android:textSize="15sp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_below="@+id/time_lay" />
+
+            <TextView
+                android:id="@+id/tv_add_arrive"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/tv_add_start"
+                android:gravity="center"/>
+
+            <ImageButton
+                android:id="@+id/ib_arrive"
+                android:layout_width="60dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:src="@drawable/calendar"
+                android:layout_below="@+id/textviewLogo"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation = "horizontal"
+            android:gravity="center"
+            android:layout_below="@+id/arrive_lay">
+            <Button
+                android:id="@+id/btn_add"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:text="ok" />
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:text="cancel"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="108dp"
+                tools:layout_editor_absoluteY="0dp" />
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/layout_panel"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <fragment
+                android:id="@+id/autocomplete_fragment"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+            <com.google.android.gms.maps.MapView
+                android:layout_weight="1"
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.google.android.gms.maps.MapFragment" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
