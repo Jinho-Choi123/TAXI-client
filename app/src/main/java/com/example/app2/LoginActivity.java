@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sf.edit();
                                 editor.putString("jwt", jwt);
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                //Intent intent = new Intent(LoginActivity.this, ChatActivity.class);
                                 intent.putExtra("userId", userId.getText().toString());
                                 userId.setText("");
                                 userPassword.setText("");

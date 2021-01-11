@@ -1,6 +1,7 @@
 package com.example.app2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class mypageAdapter extends RecyclerView.Adapter<mypageAdapter.ViewHolder
         public TextView endpointView;
         public TextView membernumView;
         public Button leaveBtn;
+        public Button chatBtn;
 
 
         public ViewHolder(View view) {
@@ -43,6 +45,7 @@ public class mypageAdapter extends RecyclerView.Adapter<mypageAdapter.ViewHolder
             endpointView = (TextView) view.findViewById(R.id.endpoint);
             membernumView = (TextView) view.findViewById(R.id.members_num);
             leaveBtn = (Button) view.findViewById(R.id.leavebtn);
+            chatBtn = (Button) view.findViewById(R.id.chatbtn);
         }
     }
 
@@ -102,6 +105,19 @@ public class mypageAdapter extends RecyclerView.Adapter<mypageAdapter.ViewHolder
                 requestQueue.add(jsonObjectRequest);
             }
         });
+
+        //chat btn
+        holder.chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String groupid = group.groupId;
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("groupId", groupid);
+                intent.putExtra("userId", userId);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override

@@ -43,6 +43,14 @@
                 android:layout_height="match_parent"
                 android:id="@+id/leavebtn"
                 />
+           <Button
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="2"
+               android:text="Chat"
+               android:id="@+id/chatbtn"
+               />
+
 
         </LinearLayout>
 

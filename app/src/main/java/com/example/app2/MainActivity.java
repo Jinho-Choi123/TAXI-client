@@ -62,9 +62,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.searchpage:
                         loadFragment(new SearchFragment());
                         break;
-                    case R.id.chatpage:
-                        loadFragment(new ChatFragment());
-                        break;
                     case R.id.mypage:
                         loadFragment(new MyPageFragment());
                         break;
