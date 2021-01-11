@@ -63,8 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                             Boolean success = response.getBoolean("success");
                             if(success) {
                                 //login success
-                                userId.setText("");
-                                userPassword.setText("");
                                 Toast login = Toast.makeText(getApplicationContext(), "Login Success!", LENGTH_SHORT);
                                 login.show();
                                 String jwt = response.getString("jwt");
@@ -73,6 +71,10 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sf.edit();
                                 editor.putString("jwt", jwt);
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                //Intent intent = new Intent(LoginActivity.this, ChatActivity.class);
+                                intent.putExtra("userId", userId.getText().toString());
+                                userId.setText("");
+                                userPassword.setText("");
                                 startActivity(intent);
                             } else {
                                 //failed to login
@@ -116,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
         new AlertDialog.Builder(LoginActivity.this)
                 .setTitle("Register")
                 .setView(registerLayout)
-                .setPositiveButton("Register as Teacher", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Register", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //when register button is clicked
@@ -128,7 +130,6 @@ public class LoginActivity extends AppCompatActivity {
                         HashMap data = new HashMap();
                         data.put("userId", userid);
                         data.put("userPassword", userpassword);
-                        data.put("isTeacher", true);
                         JSONObject jsonreq = new JSONObject(data);
 
                         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, register_url, jsonreq, new Response.Listener<JSONObject>() {
@@ -156,47 +157,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
 
-                        requestQueue.add(jsonObjectRequest);
-                    }
-                })
-                .setNegativeButton("Register as Student", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //when register button is clicked
-                        String userid = register_userId.getText().toString();
-                        String userpassword = register_userPassword.getText().toString();
-                        Logger.log("user id and user password is ", userid + userpassword);
-                        String register_url = "http://192.249.18.169:8080/auth/register";
-                        RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
-                        HashMap data = new HashMap();
-                        data.put("userId", userid);
-                        data.put("userPassword", userpassword);
-                        data.put("isTeacher", false);
-                        JSONObject jsonreq = new JSONObject(data);
-
-                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, register_url, jsonreq, new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                try {
-                                    Boolean success = response.getBoolean("success");
-                                    String msg = response.getString("msg");
-                                    if(success) {
-                                        Toast registerSuccess = Toast.makeText(LoginActivity.this, "Register Success", LENGTH_SHORT);
-                                        registerSuccess.show();
-                                    } else {
-                                        Toast registerFail = Toast.makeText(LoginActivity.this, msg, LENGTH_SHORT);
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-
-                            }
-                        });
                         requestQueue.add(jsonObjectRequest);
                     }
                 })

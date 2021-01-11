@@ -15,10 +15,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
-
+    String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        this.userId = intent.getStringExtra("userId");
+        Logger.log("userid is gggggggggggggg", this.userId);
         setContentView(R.layout.activity_main);
 
         //set event handler for floating button
@@ -39,12 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.searchpage:
-                        //dialog을 만든다.
-
                         loadFragment(new SearchFragment());
-                        break;
-                    case R.id.chatpage:
-                        loadFragment(new ChatFragment());
                         break;
                     case R.id.mypage:
                         loadFragment(new MyPageFragment());
@@ -62,10 +60,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        FragmentManager fm = getSupportFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        Fragment initialFragment = new SearchFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("userId", this.userId);
+//        initialFragment.setArguments(bundle);
+//        ft.add(R.id.fragment, initialFragment);
+//        ft.commit();
+
+        loadFragment(new SearchFragment());
 
     }
     //fragment loader
     public void loadFragment(Fragment fragment) {
+        Bundle bundle = new Bundle();
+        bundle.putString("userId", this.userId);
+        fragment.setArguments(bundle);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragment, fragment);

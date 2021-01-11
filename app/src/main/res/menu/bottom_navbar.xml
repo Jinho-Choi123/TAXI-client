@@ -6,10 +6,6 @@
         android:icon="@drawable/search"
         />
     <item
-        android:id="@+id/chatpage"
-        android:title="Chat"
-        android:icon="@drawable/chat"/>
-    <item
         android:id="@+id/mypage"
         android:title="MyPage"
         android:icon="@drawable/user"/>
