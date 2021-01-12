@@ -142,7 +142,8 @@ public class LoginActivity extends AppCompatActivity {
         LinearLayout registerLayout = (LinearLayout) vi.inflate(R.layout.register_dialog, null);
 
         final EditText register_userId = (EditText) registerLayout.findViewById(R.id.register_userId);
-        final EditText register_userPassword = (EditText) registerLayout.findViewById(R.id.register_userPassword);
+        final EditText register_userPassword = (EditText) registerLayout.findViewById(R.id.register_userPassword1);
+        final EditText register_userPassword2 = (EditText) registerLayout.findViewById(R.id.register_userPassword2);
 
         new AlertDialog.Builder(LoginActivity.this)
                 .setTitle("Register")
@@ -152,7 +153,19 @@ public class LoginActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         //when register button is clicked
                         String userid = register_userId.getText().toString();
+
+                        if(userid.length() < 6) {
+                            Toast.makeText(getApplicationContext(), "userPassword must be at least 6 characters.", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
                         String userpassword = register_userPassword.getText().toString();
+                        String userpassword2 = register_userPassword2.getText().toString();
+                        if(!userpassword.equals(userpassword2)) {
+                            Toast.makeText(getApplicationContext(), "userPassword doesnt match. ", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
                         Logger.log("user id and user password is ", userid + userpassword);
                         String register_url = "http://192.249.18.169:8080/auth/register";
                         RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
