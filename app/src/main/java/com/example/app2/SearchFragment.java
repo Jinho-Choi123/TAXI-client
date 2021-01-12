@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -52,6 +53,9 @@ public class SearchFragment extends Fragment {
     ArrayList<Group> group_list;
     private String userId;
     private String query = "";
+    private Double endpoint_lat;
+    private Double endpoint_lon;
+    private LatLng location;
 
 
     public SearchFragment() {
@@ -98,7 +102,7 @@ public class SearchFragment extends Fragment {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 currentDate.set(year, month, dayOfMonth);
                 datepicker.setText("Date: " + transFormat.format(currentDate.getTime()));
-                searchGroup(query, recyclerView);
+                searchGroup(query,endpoint_lat, endpoint_lon, recyclerView);
             }
         };
 
@@ -123,14 +127,17 @@ public class SearchFragment extends Fragment {
 
 
         AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getChildFragmentManager().findFragmentById(R.id.autocomplete_search);
-        autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
         autocompleteSupportFragment.setHint("도착지를 입력하시오");
         autocompleteSupportFragment.setCountry("KR");
         autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
-                searchGroup(place.getName(), recyclerView);
                 query = place.getName();
+                location = place.getLatLng();
+                endpoint_lat = location.latitude;
+                endpoint_lon = location.longitude;
+                searchGroup(query,endpoint_lat,endpoint_lon , recyclerView);
             }
 
             @Override
@@ -157,7 +164,7 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    private void searchGroup(String query, RecyclerView recyclerView) {
+    private void searchGroup(String query, Double lat, Double lon,RecyclerView recyclerView) {
         this.query = query;
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         String geourl = "http://192.249.18.169:8080/group/search";
@@ -168,6 +175,8 @@ public class SearchFragment extends Fragment {
         Calendar matchdate = currentDate;
         data.put("endpointaddress", query);
         data.put("matchdate", currentDate.getTime().toString());
+        data.put("endpoint_lat", lat);
+        data.put("endpoint_lon", lon);
         JSONObject jreq = new JSONObject(data);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, geourl, jreq, new Response.Listener<JSONObject>() {
@@ -176,6 +185,7 @@ public class SearchFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 //get array of Group(DB) object
                 try {
+                    Logger.log("got reeeeeeqqqqqqqq", "got req");
                     JSONArray searchData = response.getJSONArray("data");
                     for(int i=0 ; i < searchData.length() ; i ++) {
                         JSONObject jsondata = searchData.getJSONObject(i);

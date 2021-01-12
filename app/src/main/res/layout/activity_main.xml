@@ -9,7 +9,7 @@
         android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.example.app2.ChatFragment"
+        class="com.example.app2.detail_fragment"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
