@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //event when + button is clicked
+                loadFragment(new AddFragment());
             }
         });
 
