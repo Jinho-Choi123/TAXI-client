@@ -38,14 +38,18 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.ViewHolder
         public TextView startpointView;
         public TextView endpointView;
         public Button joinBtn;
-        public TextView grouptimeView;
+        public TextView time_hour_View;
+        public TextView time_minute_View;
+        public TextView member_num_View;
 
         public ViewHolder(View view) {
             super(view);
             startpointView = (TextView) view.findViewById(R.id.startPoint);
             endpointView = (TextView) view.findViewById(R.id.endPoint);
             joinBtn = (Button) view.findViewById(R.id.joinbtn);
-            grouptimeView = (TextView) view.findViewById(R.id.grouptime);
+            time_hour_View = (TextView) view.findViewById(R.id.time_hour);
+            time_minute_View = (TextView) view.findViewById(R.id.time_minute);
+            member_num_View = (TextView) view.findViewById(R.id.members_num);
         }
     }
 
@@ -68,13 +72,15 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Group group = mDataset.get(position);
-        holder.startpointView.setText(group.startPoint);
-        holder.endpointView.setText(group.endPoint);
-        DateFormat dateFormat = new SimpleDateFormat("hh:mm");
-        holder.grouptimeView.setText(dateFormat.format(group.time));
+        holder.startpointView.setText("출발지: "+group.startPoint);
+        holder.endpointView.setText("도착지: "+group.endPoint);
+        DateFormat dateFormat_hour = new SimpleDateFormat("hh");
+        DateFormat dateFormat_minute = new SimpleDateFormat("mm");
+        holder.time_hour_View.setText(dateFormat_hour.format(group.time));
+        holder.time_minute_View.setText(" : " + dateFormat_minute.format(group.time));
         //join text
         int num_members = group.member_num;
-        holder.joinBtn.setText(Integer.toString(num_members) + "/4");
+        holder.member_num_View.setText("현재 인원: " + Integer.toString(num_members) + "/4");
         holder.joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +97,7 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.ViewHolder
                             Toast joinStatus = Toast.makeText(context, response.getString("msg"), Toast.LENGTH_LONG);
                             joinStatus.show();
                             if(response.getString("msg").equals("Joined Group!")) {
-                                holder.joinBtn.setText(Integer.toString(num_members + 1) + "/4");
+                                holder.member_num_View.setText("현재 인원: " + Integer.toString(num_members + 1) + "/4");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

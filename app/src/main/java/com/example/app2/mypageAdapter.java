@@ -40,7 +40,8 @@ public class mypageAdapter extends RecyclerView.Adapter<mypageAdapter.ViewHolder
         public TextView membernumView;
         public Button leaveBtn;
         public Button chatBtn;
-        public TextView grouptime;
+        public TextView time_minute;
+        public TextView time_hour;
 
 
         public ViewHolder(View view) {
@@ -48,9 +49,10 @@ public class mypageAdapter extends RecyclerView.Adapter<mypageAdapter.ViewHolder
             startpointView = (TextView) view.findViewById(R.id.startpoint);
             endpointView = (TextView) view.findViewById(R.id.endpoint);
             membernumView = (TextView) view.findViewById(R.id.members_num);
-            leaveBtn = (Button) view.findViewById(R.id.leavebtn);
-            chatBtn = (Button) view.findViewById(R.id.chatbtn);
-            grouptime = (TextView) view.findViewById(R.id.grouptime);
+            leaveBtn = (Button) view.findViewById(R.id.leave_btn);
+            chatBtn = (Button) view.findViewById(R.id.chat_btn);
+            time_hour = (TextView) view.findViewById(R.id.time_hour);
+            time_minute = (TextView) view.findViewById(R.id.time_minute);
         }
     }
 
@@ -73,11 +75,13 @@ public class mypageAdapter extends RecyclerView.Adapter<mypageAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Group group = mDataset.get(position);
-        holder.startpointView.setText(group.startPoint);
+        holder.startpointView.setText("출발지: " + group.startPoint);
         holder.membernumView.setText("현재 인원: " + Integer.toString(group.member_num) + " / 4");
-        holder.endpointView.setText(group.endPoint);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        holder.grouptime.setText(dateFormat.format(group.time));
+        holder.endpointView.setText("도착지: " + group.endPoint);
+        DateFormat dateFormat_date = new SimpleDateFormat("MM-dd");
+        DateFormat dateFormat_hour = new SimpleDateFormat("HH:mm");
+        holder.time_hour.setText(dateFormat_date.format(group.time));
+        holder.time_minute.setText(dateFormat_hour.format(group.time));
 
         //leave btn
         holder.leaveBtn.setOnClickListener(new View.OnClickListener() {

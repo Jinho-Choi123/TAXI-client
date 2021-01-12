@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -57,7 +58,6 @@ public class SearchFragment extends Fragment {
     private Double endpoint_lon;
     private LatLng location;
 
-
     public SearchFragment() {
     }
 
@@ -82,11 +82,12 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         //set date picker text to current date
+        ImageButton datepickbtn = (ImageButton) view.findViewById(R.id.date_pickerbtn);
         TextView datepicker = view.findViewById(R.id.date_picker);
         Date date = new Date();
         SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
         String current = transFormat.format(date);
-        datepicker.setText("Date: "+current);
+        datepicker.setText(current);
 
         RecyclerView recyclerView = view.findViewById(R.id.searchRecycleview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -101,12 +102,12 @@ public class SearchFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 currentDate.set(year, month, dayOfMonth);
-                datepicker.setText("Date: " + transFormat.format(currentDate.getTime()));
+                datepicker.setText(transFormat.format(currentDate.getTime()));
                 searchGroup(query,endpoint_lat, endpoint_lon, recyclerView);
             }
         };
 
-        datepicker.setOnClickListener(new View.OnClickListener() {
+        datepickbtn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
