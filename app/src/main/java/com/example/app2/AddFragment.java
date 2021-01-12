@@ -321,16 +321,18 @@ public class AddFragment extends Fragment implements OnMapReadyCallback, GoogleM
                     }
                 });
                 requestQueue.add(jsonObjectRequest);
+                FragmentManager fragmentManager1 = getActivity().getSupportFragmentManager();
+                fragmentManager1.beginTransaction().remove(AddFragment.this).commit();
+                loadFragment(new MyPageFragment());
             }
-            
         });
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().remove(AddFragment.this).commit();
-                loadFragment(new SearchFragment());
+                FragmentManager fragmentManager2 = getActivity().getSupportFragmentManager();
+                fragmentManager2.beginTransaction().remove(AddFragment.this).commit();
+                loadFragment(new MyPageFragment());
             }
         });
 
