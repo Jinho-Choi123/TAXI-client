@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/add_layout"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/white"
@@ -16,9 +16,10 @@
             android:layout_height="54dp"
             android:gravity="center"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:textSize="20sp"
-            android:text="그룹 추가" />
+            android:text="그룹 추가"
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,45 +28,25 @@
             android:gravity="center"
             android:layout_below="@+id/textviewLogo"
             android:id="@+id/time_lay"
-            android:paddingBottom="20dp"
+            android:paddingBottom="13dp"
             >
             <TextView
-                android:id="@+id/tv_add_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_below="@+id/textviewLogo"
-                android:text="날짜"
-                android:textSize="15sp"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:paddingLeft="20dp"
                 android:id="@+id/tv_add_d"
-                android:textSize="15sp"
                 android:gravity="center"
-                />
-            <ImageButton
-                android:id="@+id/add_date_picker"
-                android:layout_width="40dp"
-                android:layout_height="38dp"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:background="@color/white"
-                android:scaleType="fitCenter"
-                android:src="@drawable/calendar"
-                android:layout_below="@+id/textviewLogo"/>
-            <ImageButton
-                android:id="@+id/add_time_picker"
-                android:layout_width="40dp"
-                android:layout_height="38dp"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:background="@color/white"
-                android:scaleType="fitCenter"
-                android:src="@drawable/calendar"
-                android:layout_below="@+id/textviewLogo"/>
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:text="Pick Date"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_add_t"
+                android:gravity="center"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:text="Pick Time"
+                android:textSize="15sp"/>
+
+
         </LinearLayout>
 
         <LinearLayout
@@ -86,8 +67,8 @@
             <fragment
                 android:id="@+id/autocomplete_fragment_start"
                 android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                android:layout_width="300dp"
-                android:layout_height="30dp"
+                android:layout_width="250dp"
+                android:layout_height="25dp"
                 />
 
 
@@ -110,8 +91,8 @@
             <fragment
                 android:id="@+id/autocomplete_fragment_arrive"
                 android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                android:layout_width="300dp"
-                android:layout_height="30dp" />
+                android:layout_width="250dp"
+                android:layout_height="25dp" />
 
 
         </LinearLayout>
@@ -125,13 +106,13 @@
             <Button
                 android:id="@+id/btn_add"
                 android:layout_width="80dp"
-                android:layout_height="35dp"
+                android:layout_height="37dp"
                 android:text="ok" />
 
             <Button
                 android:id="@+id/btn_cancel"
                 android:layout_width="80dp"
-                android:layout_height="35dp"
+                android:layout_height="37dp"
                 android:text="cancel"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="108dp"

@@ -1,10 +1,8 @@
 package com.example.app2;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -31,8 +27,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.app2.GpsTracker;
-import com.example.app2.R;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -59,7 +53,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -131,15 +124,14 @@ public class AddFragment extends Fragment implements OnMapReadyCallback, GoogleM
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.getMapAsync(this);
 
-        ImageButton date_picker = view.findViewById(R.id.add_date_picker);
-        ImageButton time_picker = view.findViewById(R.id.add_time_picker);
-
-        TextView tv_add_d = view.findViewById(R.id.tv_add_d);
-
         Button btn_add = view.findViewById(R.id.btn_add);
         Button btn_cancel = view.findViewById(R.id.btn_cancel);
-        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
+        TextView tv_add_d = view.findViewById(R.id.tv_add_d);
+        TextView tv_add_t = view.findViewById(R.id.tv_add_t);
+
+        SimpleDateFormat transFormat_d = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat transFormat_t = new SimpleDateFormat("HH:mm");
         callbackMethod_d = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -151,7 +143,7 @@ public class AddFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 currentDate.set(Calendar.MONTH, month);
                 currentDate.set(Calendar.DATE, dayOfMonth);
 
-                tv_add_d.setText("Date: " + transFormat.format(currentDate.getTime()));
+                tv_add_d.setText(transFormat_d.format(currentDate.getTime()));
             }
         };
         callbackMethod_t = new TimePickerDialog.OnTimeSetListener() {
@@ -163,11 +155,11 @@ public class AddFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 currentDate.set(Calendar.HOUR, hourOfDay);
                 currentDate.set(Calendar.MINUTE, minute);
 
-                tv_add_d.setText("Date: " + transFormat.format(currentDate.getTime()));
+                tv_add_t.setText(transFormat_t.format(currentDate.getTime()));
             }
         };
 
-        date_picker.setOnClickListener(new View.OnClickListener() {
+        tv_add_d.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
@@ -179,7 +171,7 @@ public class AddFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         });
 
-        time_picker.setOnClickListener(new View.OnClickListener() {
+        tv_add_t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog dialog_t = new TimePickerDialog(getContext(), callbackMethod_t, 0, 0, true);
@@ -207,6 +199,7 @@ public class AddFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         autocompleteFragment_start.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
         autocompleteFragment_start.setCountry("KR");
+        autocompleteFragment_start.setHint("출발지를 입력하세요");
         autocompleteFragment_start.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
@@ -235,6 +228,7 @@ public class AddFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         autocompleteFragment_arrive.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
         autocompleteFragment_arrive.setCountry("KR");
+        autocompleteFragment_arrive.setHint("출발지를 입력하세요");
         autocompleteFragment_arrive.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
