@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,6 +24,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.Status;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +40,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +51,7 @@ public class SearchFragment extends Fragment {
     private RecyclerView.Adapter searchAdapter;
     ArrayList<Group> group_list;
     private String userId;
+    private String query = "";
 
 
     public SearchFragment() {
@@ -59,6 +69,7 @@ public class SearchFragment extends Fragment {
         Bundle bundle = getArguments();
         this.userId = bundle.getString("userId");
         currentDate = Calendar.getInstance();
+
     }
 
     @Override
@@ -66,7 +77,13 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        ImageButton datepicker = view.findViewById(R.id.date_picker);
+        //set date picker text to current date
+        TextView datepicker = view.findViewById(R.id.date_picker);
+        Date date = new Date();
+        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String current = transFormat.format(date);
+        datepicker.setText("Date: "+current);
+
         RecyclerView recyclerView = view.findViewById(R.id.searchRecycleview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -80,6 +97,8 @@ public class SearchFragment extends Fragment {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 currentDate.set(year, month, dayOfMonth);
+                datepicker.setText("Date: " + transFormat.format(currentDate.getTime()));
+                searchGroup(query, recyclerView);
             }
         };
 
@@ -94,24 +113,52 @@ public class SearchFragment extends Fragment {
         });
 
         //searching landing place
-        SearchView searchview =  view.findViewById(R.id.search);
-        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        PlacesClient placesClient;
+
+        String apiKey = getString(R.string.API_KEY);
+        if(!Places.isInitialized()) {
+            Places.initialize(getContext(), apiKey);
+        }
+        placesClient = Places.createClient(getContext());
+
+
+        AutocompleteSupportFragment autocompleteSupportFragment = (AutocompleteSupportFragment) getChildFragmentManager().findFragmentById(R.id.autocomplete_search);
+        autocompleteSupportFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+        autocompleteSupportFragment.setHint("도착지를 입력하시오");
+        autocompleteSupportFragment.setCountry("KR");
+        autocompleteSupportFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                //use geocoding api to find location
-                searchGroup(query, recyclerView);
-                return true;
+            public void onPlaceSelected(@NonNull Place place) {
+                searchGroup(place.getName(), recyclerView);
+                query = place.getName();
             }
+
             @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
+            public void onError(@NonNull Status status) {
+                Logger.log("error finding place", "Failed");
             }
         });
+
+
+//        SearchView searchview =  view.findViewById(R.id.search);
+//        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                //use geocoding api to find location
+//                searchGroup(query, recyclerView);
+//                return true;
+//            }
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
 
         return view;
     }
 
     private void searchGroup(String query, RecyclerView recyclerView) {
+        this.query = query;
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         String geourl = "http://192.249.18.169:8080/group/search";
         HashMap data = new HashMap();

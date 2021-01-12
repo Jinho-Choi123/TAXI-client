@@ -23,6 +23,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,12 +38,14 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.ViewHolder
         public TextView startpointView;
         public TextView endpointView;
         public Button joinBtn;
+        public TextView grouptimeView;
 
         public ViewHolder(View view) {
             super(view);
             startpointView = (TextView) view.findViewById(R.id.startPoint);
             endpointView = (TextView) view.findViewById(R.id.endPoint);
             joinBtn = (Button) view.findViewById(R.id.joinbtn);
+            grouptimeView = (TextView) view.findViewById(R.id.grouptime);
         }
     }
 
@@ -66,6 +70,8 @@ public class searchAdapter extends RecyclerView.Adapter<searchAdapter.ViewHolder
         Group group = mDataset.get(position);
         holder.startpointView.setText(group.startPoint);
         holder.endpointView.setText(group.endPoint);
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        holder.grouptimeView.setText(dateFormat.format(group.time));
         //join text
         int num_members = group.member_num;
         holder.joinBtn.setText(Integer.toString(num_members) + "/4");

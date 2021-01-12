@@ -20,7 +20,10 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -37,6 +40,7 @@ public class mypageAdapter extends RecyclerView.Adapter<mypageAdapter.ViewHolder
         public TextView membernumView;
         public Button leaveBtn;
         public Button chatBtn;
+        public TextView grouptime;
 
 
         public ViewHolder(View view) {
@@ -46,6 +50,7 @@ public class mypageAdapter extends RecyclerView.Adapter<mypageAdapter.ViewHolder
             membernumView = (TextView) view.findViewById(R.id.members_num);
             leaveBtn = (Button) view.findViewById(R.id.leavebtn);
             chatBtn = (Button) view.findViewById(R.id.chatbtn);
+            grouptime = (TextView) view.findViewById(R.id.grouptime);
         }
     }
 
@@ -69,8 +74,10 @@ public class mypageAdapter extends RecyclerView.Adapter<mypageAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         Group group = mDataset.get(position);
         holder.startpointView.setText(group.startPoint);
-        holder.membernumView.setText(Integer.toString(group.member_num) + " / 4");
+        holder.membernumView.setText("현재 인원: " + Integer.toString(group.member_num) + " / 4");
         holder.endpointView.setText(group.endPoint);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        holder.grouptime.setText(dateFormat.format(group.time));
 
         //leave btn
         holder.leaveBtn.setOnClickListener(new View.OnClickListener() {

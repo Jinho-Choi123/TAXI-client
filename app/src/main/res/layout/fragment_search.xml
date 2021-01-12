@@ -11,25 +11,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        >
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:iconifiedByDefault="false"
-            app:queryHint="도착지를 입력하시오" />
-
-        <ImageButton
-            android:layout_width="74dp"
-            android:layout_height="38dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:background="@color/white"
-            android:scaleType="fitCenter"
-            android:src="@drawable/calendar"
-            android:id="@+id/date_picker"
+        <fragment
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:id="@+id/autocomplete_search"
             />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:id="@+id/date_picker"
+            android:clickable="true"
+            android:layout_height="30dp"
+            android:textSize="20dp"
+            android:gravity="center_horizontal" />
 
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView

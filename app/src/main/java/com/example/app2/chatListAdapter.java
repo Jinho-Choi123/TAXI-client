@@ -85,7 +85,7 @@ public class chatListAdapter extends RecyclerView.Adapter {
 
         void bind(Message message) {
             messageText.setText(message.message);
-            timeText.setText(new SimpleDateFormat("HH:mm:ss").format(message.createdAt));
+            timeText.setText(new SimpleDateFormat("HH:mm").format(message.createdAt));
         }
     }
 
@@ -104,7 +104,7 @@ public class chatListAdapter extends RecyclerView.Adapter {
 
         void bind(Message message) {
             messageText.setText(message.message);
-            timeText.setText(new SimpleDateFormat("HH:mm:ss").format(message.createdAt));
+            timeText.setText(new SimpleDateFormat("HH:mm").format(message.createdAt));
             nameText.setText(message.sender);
         }
     }
