@@ -39,17 +39,10 @@
                 android:textSize="15sp"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="38dp"
                 android:paddingLeft="20dp"
                 android:id="@+id/tv_add_d"
-                android:textSize="15sp"
-                android:gravity="center"
-                />
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="38dp"
-                android:id="@+id/tv_add_t"
                 android:textSize="15sp"
                 android:gravity="center"
                 />
@@ -90,25 +83,13 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_below="@+id/time_lay" />
 
-            <TextView
-                android:id="@+id/tv_add_start"
-                android:layout_width="215dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/tv_add_start"
-                android:gravity="center"/>
+            <fragment
+                android:id="@+id/autocomplete_fragment_start"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                android:layout_width="300dp"
+                android:layout_height="30dp"
+                />
 
-            <ImageButton
-                android:id="@+id/ib_start"
-                android:layout_width="60dp"
-                android:layout_height="38dp"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:background="@color/white"
-                android:scaleType="fitCenter"
-                android:src="@drawable/calendar"
-                android:layout_below="@+id/textviewLogo"/>
 
         </LinearLayout>
         <LinearLayout
@@ -126,25 +107,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_below="@+id/time_lay" />
 
-            <TextView
-                android:id="@+id/tv_add_arrive"
-                android:layout_width="215dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_marginBottom="10dp"
-                android:layout_below="@+id/tv_add_start"
-                android:gravity="center"/>
+            <fragment
+                android:id="@+id/autocomplete_fragment_arrive"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                android:layout_width="300dp"
+                android:layout_height="30dp" />
 
-            <ImageButton
-                android:id="@+id/ib_arrive"
-                android:layout_width="60dp"
-                android:layout_height="38dp"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:background="@color/white"
-                android:scaleType="fitCenter"
-                android:src="@drawable/calendar"
-                android:layout_below="@+id/textviewLogo"/>
 
         </LinearLayout>
 
@@ -178,11 +146,6 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <fragment
-                android:id="@+id/autocomplete_fragment"
-                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
             <com.google.android.gms.maps.MapView
                 android:layout_weight="1"
                 android:id="@+id/map"
